@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Lista de Tarefas</title>
+    </h:head>
+    <h:body>
+        Nova tarefa:
+        <h:form>
+            Tarefa: <h:inputText value="#{tarefasBean.atual.descricao}"
+                      required="true"   requiredMessage="Informe a descrição"        size="50"/><br/>
+            Responsável <h:inputText value="#{tarefasBean.atual.responsavel}" 
+                    required="true"   requiredMessage="Informe o responsável" size="30"/><br/>
+            Prazo <h:inputText value="#{tarefasBean.atual.prazo}" size="12"
+                               required="true"   requiredMessage="Informe o prazo">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:inputText><br/>
+            <h:commandButton value="Confirmar" action="#{tarefasBean.incluir}" />
+        </h:form>
+        <h:dataTable value="#{tarefasBean.listaTarefas}" var="t">
+            <h:column>
+                <h:outputText value="#{t.descricao}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{t.responsavel}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{t.prazo}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{t.feita}"/>
+            </h:column>
+            <h:column>
+                <h:form><h:commandButton value="Excluir" 
+                                         action="#{tarefasBean.excluir(t)}"/></h:form>
+            </h:column>
+            <h:column>
+                <h:form><h:commandButton value="Editar" 
+                                         action="#{tarefasBean.editar(t)}"/></h:form>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+
